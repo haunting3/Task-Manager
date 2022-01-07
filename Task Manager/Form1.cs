@@ -14,5 +14,12 @@ namespace Task_Manager
                 listView1.Items.Add(process.ProcessName);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string processSelected = listView1.SelectedItems[0].Text.ToString();
+            Process[] localByName = Process.GetProcessesByName(processSelected);
+            localByName.First().Kill();
+        }
     }
 }
