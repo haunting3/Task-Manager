@@ -35,9 +35,12 @@ namespace Task_Manager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string processSelected = listView1.SelectedItems[0].Text.ToString();
-            Process[] localByName = Process.GetProcessesByName(processSelected);
-            localByName.First().Kill();
+            if(listView1.SelectedItems.Count != 0) 
+            { 
+                string processSelected = listView1.SelectedItems[0].Text.ToString();
+                Process[] localByName = Process.GetProcessesByName(processSelected);
+                localByName.First().Kill();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
