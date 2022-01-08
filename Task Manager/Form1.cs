@@ -28,7 +28,7 @@ namespace Task_Manager
             if (cont != Process.GetProcesses().Length)
             {
                 cont = Process.GetProcesses().Length;
-                label1.Text = Convert.ToString(cont);
+                toolStripStatusLabel2.Text = Convert.ToString(cont);
                 ProcessesList();
             }
         }
