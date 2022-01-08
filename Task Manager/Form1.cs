@@ -1,17 +1,35 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Task_Manager
 {
     public partial class Form1 : Form
     {
+        int cont = Process.GetProcesses().Length;
         public Form1()
         {
             InitializeComponent();
+            ProcessesList();
+        }
+
+        public void ProcessesList()
+        {
+            listView1.Items.Clear();
             Process[] locallAll = Process.GetProcesses();
             foreach (Process process in locallAll)
             {
                 listView1.Items.Add(process.ProcessName);
+            }
+        }
+
+        public void UpdateList()
+        {
+            if (cont != Process.GetProcesses().Length)
+            {
+                cont = Process.GetProcesses().Length;
+                label1.Text = Convert.ToString(cont);
+                ProcessesList();
             }
         }
 
@@ -20,6 +38,11 @@ namespace Task_Manager
             string processSelected = listView1.SelectedItems[0].Text.ToString();
             Process[] localByName = Process.GetProcessesByName(processSelected);
             localByName.First().Kill();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            UpdateList();
         }
     }
 }
